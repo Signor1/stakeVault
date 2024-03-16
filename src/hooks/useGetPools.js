@@ -61,7 +61,7 @@ const useGetPools = () => {
 
       setData([...formattedData]);
     })();
-  }, []);
+  }, [contract, numOfPool]);
 
   return data;
 };

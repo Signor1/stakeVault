@@ -5,6 +5,7 @@ import { useState } from "react";
 import useHandleStakeApproval from "../hooks/useHandleStakeApproval";
 import useStake from "../hooks/useStake";
 import useClaimReward from "../hooks/useClaimReward";
+import useUnstake from "../hooks/useUnstake";
 
 
 const PoolTable = () => {
@@ -25,6 +26,8 @@ const PoolTable = () => {
 
     const handleRewardClaim = useClaimReward();
 
+    const handleUnstake = useUnstake();
+
     return (
         <div className="w-full overflow-x-scroll mt-4">
             <table className="table-auto w-full border-collapse border border-slate-500">
@@ -36,8 +39,7 @@ const PoolTable = () => {
                         <th className="py-3 font-light">Total Staked</th>
                         <th className="py-3 font-light">Reward Reserve</th>
                         <th className="py-3 font-light">Reward Rate</th>
-                        <th className="py-3 font-light">Stake</th>
-                        <th className="py-3 font-light">Claim Action</th>
+                        <th className="py-3 font-light">Action</th>
                     </tr>
                 </thead>
                 <tbody className="text-slate-200">
@@ -50,7 +52,7 @@ const PoolTable = () => {
                                 <td className="border border-slate-700 p-3 text-center">{formatter(item.totalStaked)}</td>
                                 <td className="border border-slate-700 p-3 text-center">{formatter(item.rewardReserve)}</td>
                                 <td className="border border-slate-700 p-3 text-center">{Number(item.rewardRate)}</td>
-                                <td className="flex flex-col gap-2 justify-center items-center border border-slate-700 p-3 text-center">
+                                <td className="flex gap-2 justify-center items-center border border-slate-700 p-3 text-center">
                                     <button onClick={handleApproval} className="bg-green-600 flex items-center gap-1 text-sm px-6 py-1.5 rounded text-slate-100">Approve
                                     </button>
                                     <Dialog.Root>
@@ -91,13 +93,12 @@ const PoolTable = () => {
                                             </Flex>
                                         </Dialog.Content>
                                     </Dialog.Root>
-                                </td>
-                                <td className="flex flex-col gap-2 justify-center items-center border border-slate-700 p-3 text-center">
-                                    <button onClick={() => handleRewardClaim(item.index)} className="bg-green-600 flex items-center gap-1 text-sm px-6 py-1.5 rounded text-slate-100">Claim Reward
+                                    <button onClick={() => handleRewardClaim(item.index)} className="bg-amber-600 flex items-center gap-1 text-sm px-6 py-1.5 rounded text-slate-100">Claim Reward
                                     </button>
-                                    <button onClick={() => handleUnstake(item.index)} className="bg-green-600 flex items-center gap-1 text-sm px-6 py-1.5 rounded text-slate-100">Unstake
+                                    <button onClick={() => handleUnstake(item.index)} className="bg-rose-600 flex items-center gap-1 text-sm px-6 py-1.5 rounded text-slate-100">Unstake
                                     </button>
                                 </td>
+
                             </tr>
                         ))
                     }
